@@ -22,9 +22,6 @@ class ActorManager:
             f"SELECT * FROM {self.table_name}"
         )
 
-        if not cursor:
-            return []
-
         return [
             Actor(*row) for row in cursor
         ]
