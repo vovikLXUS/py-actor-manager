@@ -9,7 +9,6 @@ class ActorManager:
         self.table_name = table_name
         self.connection = sqlite3.connect(db_name)
 
-
     def create(self, first_name: str, last_name: str) -> None:
         self.connection.execute(
             f"INSERT INTO {self.table_name} "
@@ -18,7 +17,6 @@ class ActorManager:
         )
         self.connection.commit()
 
-
     def all(self) -> list[Actor]:
         cursor = self.connection.execute(
             f"SELECT * FROM {self.table_name}"
@@ -26,11 +24,10 @@ class ActorManager:
 
         if not cursor:
             return []
-        
+
         return [
             Actor(*row) for row in cursor
         ]
-
 
     def update(self, pk: int, new_first_name: str, new_last_name: str) -> None:
         self.connection.execute(
@@ -40,7 +37,6 @@ class ActorManager:
             (new_first_name, new_last_name, pk,)
         )
         self.connection.commit()
-
 
     def delete(self, pk: int) -> None:
         self.connection.execute(
